@@ -6,7 +6,8 @@ tags = ["basics", "diy", "bestof", "doorbell", "explanation", "hardware"]
 playlists = {
   "main": {
     "title": "Общие положения",
-    "videos" : [0]
+    "videos" : [0],
+    "pic": "1.jpg"
   },
   "best": {
     "title": "Лучшие проекты",
@@ -28,7 +29,8 @@ videos = {
 
 @app.route('/')
 def main():
-    return '0'
+    output = render_template("main.html", tags_pick=tags, playlists_pick=playlists)
+    return output
 
 
 @app.route('/about')
