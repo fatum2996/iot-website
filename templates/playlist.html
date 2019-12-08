@@ -21,14 +21,19 @@
 
 	    </div>
 
+
 	    <div class="col-3 offset-1">
 	        <p class="mb-4 ">Всего {{videos_from_playlist|length}} видео </p>
                 {% for playlist_video in videos_from_playlist %}
-				<a href="{{playlist_video['id']}}">{{playlist_video["title"]}}</a><br><br>
+					<a href="../../../videos/{{playlist_video['id']}}">{{playlist_video["title"]}}</a><br><br>
                 {% endfor %}
 	    </div>
 
+
     </div><!-- /row -->
+	<div class="row mt-5">
+			<a class="btn btn-outline-primary mb-2 mr-2" href="../../../playlists/{{current_playlist}}/{{next_number}}">Следующее видео</a>
+	</div>
 </div><!-- /container -->
 
 </body>

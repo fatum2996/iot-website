@@ -50,16 +50,39 @@ def video(id):
     output = render_template("video.html", video_name=videos[id_int]["title"], tags=tag_list, videoid=videos[id_int]["videoid"])
     return output
 
-@app.route('/playlists/<playlist_name>') #добавить обработку несуществующего плейлиста
+@app.route('/playlists/<playlist_name>/') #добавить обработку несуществующего плейлиста
 def playlist(playlist_name):
     videos_in_playlist = []
     for video_number in playlists[playlist_name]["videos"]:
         videos_in_playlist.append({"id": videos[video_number]["id"], "title": videos[video_number]["title"]})
-    print(videos_in_playlist)
+    if len(playlists[playlist_name]["videos"]) > 1:
+        number_in_playlist = '1'
+    else:
+        number_in_playlist = '0'
     output = render_template("playlist.html", playlist_name_display=playlists[playlist_name]["title"],
                              current_video=videos[playlists[playlist_name]["videos"][0]]["title"],
                              current_videoid=videos[playlists[playlist_name]["videos"][0]]["videoid"],
-                             videos_from_playlist=videos_in_playlist)
+                             videos_from_playlist=videos_in_playlist,
+                             current_playlist=playlist_name,
+                             next_number=number_in_playlist)
+    return output
+
+@app.route('/playlists/<playlist_name>/<number_in_playlist>/') #добавить обработку несуществующего видео
+def playlist_video(playlist_name, number_in_playlist):
+    videos_in_playlist = []
+    for video_number in playlists[playlist_name]["videos"]:
+        videos_in_playlist.append({"id": videos[video_number]["id"], "title": videos[video_number]["title"]})
+    print(number_in_playlist)
+    print(playlists[playlist_name]["videos"])
+    if int(number_in_playlist) > len(playlists[playlist_name]["videos"]) - 1:
+        number_in_playlist = str(int(number_in_playlist)+1)
+    print(number_in_playlist)
+    output = render_template("playlist.html", playlist_name_display=playlists[playlist_name]["title"],
+                             current_video=videos[playlists[playlist_name]["videos"][int(number_in_playlist)]]["title"],
+                             current_videoid=videos[playlists[playlist_name]["videos"][int(number_in_playlist)]]["videoid"],
+                             videos_from_playlist=videos_in_playlist,
+                             current_playlist=playlist_name,
+                             next_number=number_in_playlist)
     return output
 
 @app.errorhandler(404)
