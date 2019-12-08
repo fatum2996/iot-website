@@ -6,16 +6,18 @@ tags = ["basics", "diy", "bestof", "doorbell", "explanation", "hardware"]
 playlists = {
   "main": {
     "title": "Общие положения",
-    "videos" : [0],
-    "pic": "1.jpg"
+    "videos": [0],
+    "pic": "1.png"
   },
   "best": {
     "title": "Лучшие проекты",
-    "videos" : [1, 3]
+    "videos": [1, 3],
+    "pic": "2.jpg"
   },
   "manuals": {
-        "title": "Инструкции",
-        "videos": [2]
+    "title": "Инструкции",
+    "videos": [2],
+    "pic": "3.jpg"
   }
 }
 
